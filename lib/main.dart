@@ -144,7 +144,7 @@ class _MyAppState extends State<MyApp> {
                   textColor: Colors.white,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                   onPressed: () { 
-                    readData();
+                    readsingleData();
                    },
                 ),
                 MaterialButton(
@@ -204,6 +204,21 @@ class _MyAppState extends State<MyApp> {
   }
   });
 }
+
+  readsingleData() async{
+    log("clicked read");
+    final docRef = await FirebaseFirestore.instance.collection("MyCollage").doc(studentId);
+    docRef.get().then(
+      (DocumentSnapshot doc) {
+        final data = doc.data() as Map<String, dynamic>;
+          for (final mapEntry in data.entries) {
+            final key = mapEntry.key;
+            final value = mapEntry.value;
+            log('Key: $key, Value: $value');  // Key: a, Value: 1 ...
+            }
+      },
+      onError: (e) => print("Error getting document: $e"),
+);
   }
   updateData(){
     log("Updated!");
@@ -211,3 +226,4 @@ class _MyAppState extends State<MyApp> {
   deleteData(){
     log("Deleted!");
   }
+}
