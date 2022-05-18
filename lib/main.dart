@@ -166,7 +166,34 @@ class _MyAppState extends State<MyApp> {
                    },
                 )
               ],
-            )
+            ),
+            StreamBuilder(
+              stream: FirebaseFirestore.instance.collection("MyCollage").snapshots(),
+              builder: (context,AsyncSnapshot snapshot){
+                // return Text(snapshot.hasData ? '${snapshot.data}' : '');
+                if(snapshot.hasData)
+                {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: snapshot.data.docs.length,
+                    itemBuilder: (context, index){
+                      DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
+                      return Row(children: [
+                        Expanded(child: Text(documentSnapshot["studentName"])),
+                        Expanded(child: Text(documentSnapshot["studentId"])),
+                        Expanded(child: Text(documentSnapshot["studyprogramId"])),
+                        Expanded(child: Text(documentSnapshot["studentGPA"].toString())),
+                      ],);
+                    },
+                  
+                  );
+                }
+                if(snapshot.hasError){
+                  return Text("Error Loading Data");
+                }
+                return Text('Loading...');
+              }
+              )
           ],
         ),
       ),
@@ -205,6 +232,7 @@ class _MyAppState extends State<MyApp> {
   });
 }
 
+// Reading data with the studentId
   readsingleData() async{
     log("clicked read");
     final docRef = await FirebaseFirestore.instance.collection("MyCollage").doc(studentId);
@@ -220,10 +248,26 @@ class _MyAppState extends State<MyApp> {
       onError: (e) => print("Error getting document: $e"),
 );
   }
-  updateData(){
+  updateData() async{
     log("Updated!");
+    DocumentReference documentReference = FirebaseFirestore.instance.collection('MyCollage').doc(studentId);
+
+
+    final json = <String, dynamic>{
+      "studentName": studentName,
+      "studentId" :studentId,
+      "studyprogramId" : studyProgramId,
+      "studentGPA": studentGPA
+    };
+
+    await documentReference.set(json).whenComplete(() => log("$studentName Updated"));
+    clearText();
+
   }
-  deleteData(){
+  deleteData() async{
     log("Deleted!");
+    DocumentReference documentReference = FirebaseFirestore.instance.collection('MyCollage').doc(studentId);
+    await documentReference.delete().whenComplete(() => log("$studentName Deleted!"));
+    clearText();
   }
 }
