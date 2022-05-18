@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:html';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +31,10 @@ class _MyAppState extends State<MyApp> {
   late String studentName, studentId, studyProgramId;
   late double studentGPA;
 
-  final fieldText = TextEditingController();
+  final fieldText1 = TextEditingController();
+  final fieldText2 = TextEditingController();
+  final fieldText3 = TextEditingController();
+  final fieldText4 = TextEditingController();
 
   getStudentName(name){
     this.studentName = name;
@@ -73,7 +75,7 @@ class _MyAppState extends State<MyApp> {
                 onChanged: (String name){
                   getStudentName(name);
                 },
-                controller: fieldText,
+                controller: fieldText1,
               ),
             ),
             Padding(
@@ -89,7 +91,7 @@ class _MyAppState extends State<MyApp> {
                 onChanged: (String studentId){
                   getStudentId(studentId);
                 },
-                controller: fieldText,
+                controller: fieldText2,
               ),
             ),
             Padding(
@@ -105,7 +107,7 @@ class _MyAppState extends State<MyApp> {
                 onChanged: (String programId){
                   getStudentProgramID(programId);
                 },
-                controller: fieldText,
+                controller: fieldText3,
               ),
             ),
             Padding(
@@ -121,7 +123,7 @@ class _MyAppState extends State<MyApp> {
                 onChanged: (String gpa){
                   getStudentGPA(gpa);
                 },
-                controller: fieldText,
+                controller: fieldText4,
               ),
             ),
             Row(
@@ -172,30 +174,36 @@ class _MyAppState extends State<MyApp> {
   }
 
   void clearText (){
-    fieldText.clear();
+    fieldText1.clear();
+    fieldText2.clear();
+    fieldText3.clear();
+    fieldText4.clear();
   }
   createData() async {
     log("Created!");
-    DocumentReference documentReference = FirebaseFirestore.instance.collection('MyCollage').doc(studentName);
+    DocumentReference documentReference = FirebaseFirestore.instance.collection('MyCollage').doc(studentId);
 
-    //Create Map
-    final json = {
+
+    final json = <String, dynamic>{
       "studentName": studentName,
       "studentId" :studentId,
       "studyprogramId" : studyProgramId,
       "studentGPA": studentGPA
     };
+
     await documentReference.set(json).whenComplete(() => log("$studentName created"));
     clearText();
     
   }
 
-  readData(){
-    log("Read!");
-    DocumentReference documentReference = FirebaseFirestore.instance.collection("MyCollage").doc(studentId);
-    documentReference.get().then((value) {
-      
-    });
+// Getting all data from the firebase database
+  readData() async{
+    await FirebaseFirestore.instance.collection("MyCollage").get().then((event) {
+  for (var doc in event.docs) {
+    log("${doc.id} => ${doc.data()}");
+  }
+  });
+}
   }
   updateData(){
     log("Updated!");
@@ -203,4 +211,3 @@ class _MyAppState extends State<MyApp> {
   deleteData(){
     log("Deleted!");
   }
-}
