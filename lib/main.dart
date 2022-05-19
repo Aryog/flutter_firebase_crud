@@ -58,143 +58,164 @@ class _MyAppState extends State<MyApp> {
       appBar: AppBar(
         title: Text("My Flutter Collage"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Name",
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue , width: 2.0)
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "Name",
+                    fillColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue , width: 2.0)
+                    ),
                   ),
+                  onChanged: (String name){
+                    getStudentName(name);
+                  },
+                  controller: fieldText1,
                 ),
-                onChanged: (String name){
-                  getStudentName(name);
-                },
-                controller: fieldText1,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Student ID",
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue , width: 2.0)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "Student ID",
+                    fillColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue , width: 2.0)
+                    ),
                   ),
+                  onChanged: (String studentId){
+                    getStudentId(studentId);
+                  },
+                  controller: fieldText2,
                 ),
-                onChanged: (String studentId){
-                  getStudentId(studentId);
-                },
-                controller: fieldText2,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Study Program ID",
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue , width: 2.0)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "Study Program ID",
+                    fillColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue , width: 2.0)
+                    ),
                   ),
+                  onChanged: (String programId){
+                    getStudentProgramID(programId);
+                  },
+                  controller: fieldText3,
                 ),
-                onChanged: (String programId){
-                  getStudentProgramID(programId);
-                },
-                controller: fieldText3,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: "GPA",
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue , width: 2.0)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "GPA",
+                    fillColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue , width: 2.0)
+                    ),
                   ),
+                  onChanged: (String gpa){
+                    getStudentGPA(gpa);
+                  },
+                  controller: fieldText4,
                 ),
-                onChanged: (String gpa){
-                  getStudentGPA(gpa);
-                },
-                controller: fieldText4,
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                MaterialButton(
-                  color: Colors.green,
-                  child: Text("Create"),
-                  textColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                  onPressed: () { 
-                    createData();
-                   },
-                ),
-                MaterialButton(
-                  color: Colors.blue,
-                  child: Text("Read"),
-                  textColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                  onPressed: () { 
-                    readsingleData();
-                   },
-                ),
-                MaterialButton(
-                  color: Colors.orange,
-                  child: Text("Update"),
-                  textColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                  onPressed: () { 
-                    updateData();
-                   },
-                ),
-                MaterialButton(
-                  color: Colors.red,
-                  child: Text("delete"),
-                  textColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                  onPressed: () { 
-                    deleteData();
-                   },
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MaterialButton(
+                    color: Colors.green,
+                    child: Text("Create"),
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    onPressed: () { 
+                      createData();
+                     },
+                  ),
+                  MaterialButton(
+                    color: Colors.blue,
+                    child: Text("Read"),
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    onPressed: () { 
+                      readsingleData();
+                     },
+                  ),
+                  MaterialButton(
+                    color: Colors.orange,
+                    child: Text("Update"),
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    onPressed: () { 
+                      updateData();
+                     },
+                  ),
+                  MaterialButton(
+                    color: Colors.red,
+                    child: Text("delete"),
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    onPressed: () { 
+                      deleteData();
+                     },
+                  )
+                ],
+              ),
+              SizedBox(height: 20,),
+              StreamBuilder(
+                
+                stream: FirebaseFirestore.instance.collection("MyCollage").snapshots(),
+                builder: (context,AsyncSnapshot snapshot){
+                  // return Text(snapshot.hasData ? '${snapshot.data}' : '');
+                  if(snapshot.hasData)
+                  {
+                    return ListView.builder(
+                      padding: EdgeInsets.only(bottom: 20.0),
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: snapshot.data.docs.length,
+                      
+                      itemBuilder: (context, index){
+                        DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
+                        return Container(
+                          decoration: BoxDecoration(
+                                      border: index == 0
+                                      ? const Border() // This will create no border for the first item
+                                      : Border(
+                                      top: BorderSide(
+                                            width: 1,
+                                            color: Theme.of(context).primaryColor
+                                            )
+                                          ),
+                          ),
+                          padding: EdgeInsets.only(bottom: 10.0 , top: 10),
+                          child: Row(children: [
+                            Expanded(child: Container(child: Text('$index.'))),
+                            Expanded(flex:3 ,child: Text(documentSnapshot["studentName"],style: TextStyle(fontSize: 15),),),
+                            Expanded(child: Text(documentSnapshot["studentId"])),
+                            Expanded(child: Text(documentSnapshot["studyprogramId"])),
+                            Expanded(child: Text(documentSnapshot["studentGPA"].toString())),
+                          ],),
+                        );
+                      },
+                    
+                    );
+                  }
+                  if(snapshot.hasError){
+                    return Text("Error Loading Data");
+                  }
+                  return Text('Loading...');
+                }
                 )
-              ],
-            ),
-            StreamBuilder(
-              stream: FirebaseFirestore.instance.collection("MyCollage").snapshots(),
-              builder: (context,AsyncSnapshot snapshot){
-                // return Text(snapshot.hasData ? '${snapshot.data}' : '');
-                if(snapshot.hasData)
-                {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: snapshot.data.docs.length,
-                    itemBuilder: (context, index){
-                      DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
-                      return Row(children: [
-                        Expanded(child: Text(documentSnapshot["studentName"])),
-                        Expanded(child: Text(documentSnapshot["studentId"])),
-                        Expanded(child: Text(documentSnapshot["studyprogramId"])),
-                        Expanded(child: Text(documentSnapshot["studentGPA"].toString())),
-                      ],);
-                    },
-                  
-                  );
-                }
-                if(snapshot.hasError){
-                  return Text("Error Loading Data");
-                }
-                return Text('Loading...');
-              }
-              )
-          ],
+            ],
+          ),
         ),
       ),
     );
