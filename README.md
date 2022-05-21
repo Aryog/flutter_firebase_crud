@@ -3,7 +3,6 @@
   Real time database with Streambuilder!
 ## ScreenShot
 ![CRUD App](https://user-images.githubusercontent.com/87793885/169643398-85dc2f17-f15e-4891-b867-00abce724eda.png)
-A new Flutter project.
 
 ## Getting Started
 
