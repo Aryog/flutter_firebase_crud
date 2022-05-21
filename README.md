@@ -2,7 +2,7 @@
 # Flutter_firebaseFirestore
   Real time database with Streambuilder!
 ## ScreenShot
-![IMG_20220521_134953](https://user-images.githubusercontent.com/87793885/169642364-38c3ca11-af4c-406a-8298-41aafee46592.jpg)
+![CRUD App](https://user-images.githubusercontent.com/87793885/169643398-85dc2f17-f15e-4891-b867-00abce724eda.png)
 A new Flutter project.
 
 ## Getting Started
