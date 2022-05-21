@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.crud_app">
    <application
-        android:label="crud_app"
+        android:label="CRUD App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

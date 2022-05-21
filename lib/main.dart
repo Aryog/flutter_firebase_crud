@@ -136,7 +136,7 @@ class _MyAppState extends State<MyApp> {
                     textColor: Colors.white,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     onPressed: () { 
-                      createData();
+                      showSimpleAlert();
                      },
                   ),
                   MaterialButton(
@@ -227,6 +227,36 @@ class _MyAppState extends State<MyApp> {
     fieldText3.clear();
     fieldText4.clear();
   }
+
+
+
+  // Alert dialog implementation
+ Future<void> showSimpleAlert() async
+  {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, //user must tap on buttons
+      builder: (context){
+        return AlertDialog(
+          title: Text("Confirmation!"),
+          content: SingleChildScrollView(child: ListBody(children: [
+            Text('Do you want to confirm.'),
+          ],
+          )
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Approve'),
+            onPressed: () {
+              Navigator.of(context).pop();
+              createData();
+            },
+          ),
+        ],
+        );
+      }
+    );
+  }
   createData() async {
     log("Created!");
     DocumentReference documentReference = FirebaseFirestore.instance.collection('MyCollage').doc(studentId);
@@ -264,6 +294,9 @@ class _MyAppState extends State<MyApp> {
             final key = mapEntry.key;
             final value = mapEntry.value;
             log('Key: $key, Value: $value');  // Key: a, Value: 1 ...
+            if(key == "studyprogramId"){fieldText3.text=value;}
+            if(key == "studentName"){fieldText1.text=value;}
+            if(key == "studentGPA"){fieldText4.text=value.toString();}
             }
       },
       onError: (e) => print("Error getting document: $e"),
@@ -288,7 +321,7 @@ class _MyAppState extends State<MyApp> {
   deleteData() async{
     log("Deleted!");
     DocumentReference documentReference = FirebaseFirestore.instance.collection('MyCollage').doc(studentId);
-    await documentReference.delete().whenComplete(() => log("$studentName Deleted!"));
+    await documentReference.delete().whenComplete(() => log("$studentId Deleted!"));
     clearText();
   }
 }
